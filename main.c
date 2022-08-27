@@ -13,22 +13,19 @@ double loop_time_mean = 0;
 unsigned int inner_loop_time = 0;
 
 void *readerThread(void *vargp){
-  int last_state = 0;
+  int last_state = FALSE;
   while(!endThread) {
     clock_t init_loop_time = clock();
-    char test_state = is_high(8,11);
+    int test_state = is_high(8,11);
     if(test_state != last_state) {
       printf("State changed to %s\n", test_state ? "true" : "false");
-    }
-    if(test_state) {
-      printf("a");
     }
     last_state = test_state;
     clock_t elapsed = clock() - init_loop_time;
     double time_in_seconds = ((double)elapsed)/CLOCKS_PER_SEC;
     // should sleep to fulfill 1usec clock
     unsigned int time_in_nano = time_in_seconds*1000000000;
-    inner_loop_time = time_in_nano/1000;
+    inner_loop_time = time_in_seconds;
     if(time_in_nano < 1000){
       struct timespec req, rem;
       req.tv_sec = 0;
