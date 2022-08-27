@@ -13,7 +13,7 @@ double loop_time_mean = 0;
 unsigned int inner_loop_time = 0;
 
 void *readerThread(void *vargp){
-  char last_state = FALSE;
+  int last_state = 0;
   while(!endThread) {
     clock_t init_loop_time = clock();
     char test_state = is_high(8,11);
