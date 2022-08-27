@@ -24,8 +24,11 @@ void *readerThread(void *vargp){
     double time_in_seconds = ((double)elapsed)/CLOCKS_PER_SEC;
     // should sleep to fulfill 1usec clock
     unsigned int time_in_nano = time_in_seconds*1000000000;
-    if(time_in_nano < 1000){ 
-      nanosleep(1000 - time_in_nano)
+    if(time_in_nano < 1000){
+      struct timespec req, rem;
+      req.tv_sec = 0;
+      req.tv_nsec = 1000 - time_in_nano;
+      nanosleep(&req, &rem);
     }
 
     clock_t full_elapsed = clock() - init_loop_time;
@@ -44,7 +47,10 @@ int main(void) {
   pthread_t readerThreadId;
   pthread_create(&readerThreadId, NULL, readerThread, &readerThreadId);
 
-  sleep(10);
+  struct timespec req, rem;
+  req.tv_sec = 10;
+  req.tv_nsec = 0;
+  nanosleep(&req, &rem);
 
   endThread = TRUE;
   pthread_join(readerThreadId, NULL);
