@@ -4,6 +4,9 @@
 #include <time.h>
 #include <pthread.h>
 
+#define TRUE 1
+#define FALSE 0
+
 char endThread = FALSE;
 double loop_time_count = 0;
 double loop_time_mean = 0;
