@@ -10,6 +10,7 @@
 char endThread = FALSE;
 double loop_time_count = 0;
 double loop_time_mean = 0;
+unsigned int inner_loop_time = 0;
 
 void *readerThread(void *vargp){
   char last_state = FALSE;
@@ -24,6 +25,7 @@ void *readerThread(void *vargp){
     double time_in_seconds = ((double)elapsed)/CLOCKS_PER_SEC;
     // should sleep to fulfill 1usec clock
     unsigned int time_in_nano = time_in_seconds*1000000000;
+    inner_loop_time = time_in_nano;
     if(time_in_nano < 1000){
       struct timespec req, rem;
       req.tv_sec = 0;
@@ -57,6 +59,7 @@ int main(void) {
 
   printf("loops %d\n", loop_time_count);
   printf("mean time in micro %f\n", loop_time_mean*1000000);
+  printf("%u", inner_loop_time);
 
   iolib_free();
   return(0);
