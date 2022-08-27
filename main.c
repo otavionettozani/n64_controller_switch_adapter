@@ -15,7 +15,7 @@ void *readerThread(void *vargp){
   char last_state = FALSE;
   while(!endThread) {
     clock_t init_loop_time = clock();
-    char test_state = is_high(8,8);
+    char test_state = is_high(8,11);
     if(test_state != last_state) {
       printf("State changed to %s\n", test_state ? "true" : "false");
       last_state = test_state;
@@ -42,7 +42,7 @@ void *readerThread(void *vargp){
 
 int main(void) {
   iolib_init();
-  iolib_setdir(8, 8, BBBIO_DIR_IN);
+  iolib_setdir(8, 11, BBBIO_DIR_IN);
 
   pthread_t readerThreadId;
   pthread_create(&readerThreadId, NULL, readerThread, &readerThreadId);
@@ -55,7 +55,7 @@ int main(void) {
   endThread = TRUE;
   pthread_join(readerThreadId, NULL);
 
-  printf("loops %d", loop_time_count);
+  printf("loops %d\n", loop_time_count);
   printf("mean time in micro %f\n", loop_time_mean*1000000);
 
   iolib_free();
