@@ -19,8 +19,8 @@ void *readerThread(void *vargp){
     char test_state = is_high(8,11);
     if(test_state != last_state) {
       printf("State changed to %s\n", test_state ? "true" : "false");
-      last_state = test_state;
     }
+    last_state = test_state;
     clock_t elapsed = clock() - init_loop_time;
     double time_in_seconds = ((double)elapsed)/CLOCKS_PER_SEC;
     // should sleep to fulfill 1usec clock
