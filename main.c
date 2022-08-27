@@ -11,6 +11,7 @@ char endThread = FALSE;
 double loop_time_count = 0;
 double loop_time_mean = 0;
 double inner_loop_time = 0;
+int looper_c = 0;
 
 void *readerThread(void *vargp){
   int last_state = FALSE;
@@ -33,11 +34,14 @@ void *readerThread(void *vargp){
       nanosleep(&req, &rem);
     }
 
-    clock_t full_elapsed = clock() - init_loop_time;
-    double full_time_in_seconds = ((double)full_elapsed)/CLOCKS_PER_SEC;
-    double loop_time_sum = (loop_time_mean*loop_time_count + full_time_in_seconds);
-    loop_time_count += 1;
-    loop_time_mean = loop_time_sum / loop_time_count;
+    looper_c = (looper_c + 1)% 1000;
+    if (!looper_c) {
+      clock_t full_elapsed = clock() - init_loop_time;
+      double full_time_in_seconds = ((double)full_elapsed)/CLOCKS_PER_SEC;
+      double loop_time_sum = (loop_time_mean*loop_time_count + full_time_in_seconds);
+      loop_time_count += 1;
+      loop_time_mean = loop_time_sum / loop_time_count;
+    }
   }
   return NULL;
 }
