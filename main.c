@@ -59,7 +59,7 @@ int main(void) {
 
   printf("loops %d\n", loop_time_count);
   printf("mean time in micro %f\n", loop_time_mean*1000000);
-  printf("%d\n", inner_loop_time);
+  printf("%f\n", inner_loop_time);
 
   iolib_free();
   return(0);
