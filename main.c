@@ -10,7 +10,7 @@
 char endThread = FALSE;
 double loop_time_count = 0;
 double loop_time_mean = 0;
-unsigned int inner_loop_time = 0;
+double inner_loop_time = 0;
 
 void *readerThread(void *vargp){
   int last_state = FALSE;
@@ -59,7 +59,7 @@ int main(void) {
 
   printf("loops %d\n", loop_time_count);
   printf("mean time in micro %f\n", loop_time_mean*1000000);
-  printf("%u", inner_loop_time);
+  printf("%d\n", inner_loop_time);
 
   iolib_free();
   return(0);
