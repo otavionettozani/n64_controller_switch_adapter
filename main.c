@@ -17,7 +17,7 @@ void *readerThread(void *vargp){
     clock_t init_loop_time = clock();
     char test_state = is_high(8,8);
     if(test_state != last_state) {
-      printf("State changed to %s", test_state ? "true" : "false");
+      printf("State changed to %s\n", test_state ? "true" : "false");
       last_state = test_state;
     }
     clock_t elapsed = clock() - init_loop_time;
@@ -55,7 +55,8 @@ int main(void) {
   endThread = TRUE;
   pthread_join(readerThreadId, NULL);
 
-  printf("%f\n", loop_time_mean);
+  printf("loops %d", loop_time_count);
+  printf("mean time in micro %f\n", loop_time_mean*1000000);
 
   iolib_free();
   return(0);
