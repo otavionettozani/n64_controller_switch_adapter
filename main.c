@@ -33,15 +33,7 @@ void *readerThread(void *vargp){
       req.tv_nsec = 1000 - time_in_nano;
       nanosleep(&req, &rem);
     }
-
-    looper_c = (looper_c + 1)% 1000;
-    if (!looper_c) {
-      clock_t full_elapsed = clock() - init_loop_time;
-      double full_time_in_seconds = ((double)full_elapsed)/CLOCKS_PER_SEC;
-      double loop_time_sum = (loop_time_mean*loop_time_count + full_time_in_seconds);
-      loop_time_count += 1;
-      loop_time_mean = loop_time_sum / loop_time_count;
-    }
+    loop_time_count += 1;
   }
   return NULL;
 }
