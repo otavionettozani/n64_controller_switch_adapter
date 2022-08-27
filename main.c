@@ -4,12 +4,12 @@
 #include <time.h>
 #include <pthread.h>
 
-char endThread = false;
+char endThread = FALSE;
 double loop_time_count = 0;
 double loop_time_mean = 0;
 
 void *readerThread(void *vargp){
-  char last_state = false;
+  char last_state = FALSE;
   while(!endThread) {
     clock_t init_loop_time = clock();
     char test_state = is_high(8,8);
@@ -42,8 +42,8 @@ int main(void) {
   pthread_create(&readerThreadId, NULL, readerThread, &readerThreadId);
 
   sleep(10);
-  
-  endThread = true;
+
+  endThread = TRUE;
   pthread_join(readerThreadId, NULL);
 
   printf("%f\n", loop_time_mean);
