@@ -9,9 +9,9 @@ volatile register uint32_t __R31;
 
 void main(void) {
   while (1) {
-    __R30 |= P9_31;
+    __R30 |= P9_30;
     __delay_cycles(CYCLES_PER_SECOND/2);
-    __R30 &= ~P9_31;
+    __R30 &= ~P9_30;
     __delay_cycles(CYCLES_PER_SECOND/2);
   }
 }
