@@ -1,4 +1,4 @@
-#include <stdin.h>
+#include <stdint.h>
 #include <rsc_types.h>
 #include "./r30_pins.c"
 
