@@ -9,7 +9,7 @@ LDFLAGS = $(PRU_SWPKG)/labs/lab_2/AM335x_PRU.cmd
 all: hw_test
 
 hw.o: hw.c
-    $(CC) $(CFLAGS) $^ --output_file $@
+  $(CC) $(CFLAGS) $^ --output_file $@
 
 hw_test: hw.o
-    $(LD) $(LDFLAGS) $^ -o $@
+  $(LD) $(LDFLAGS) $^ -o $@
